@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PASSWORD LAB — веб-приложение для генерации и проверки надёжности паролей"
+    />
+    <title>PASSWORD LAB — Генератор и проверка надёжности паролей</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <canvas id="matrix-bg" aria-hidden="true"></canvas>
+    <canvas id="matrix-bg2" aria-hidden="true"></canvas>
+
+    <div class="app-shell">
+      <header class="app-header glass-panel">
+        <p class="eyebrow">Учебный проект</p>
+        <h1>PASSWORD LAB</h1>
+        <p class="subtitle">Веб-приложение для генерации и проверки паролей</p>
+      </header>
+
+      <main class="layout-grid">
+        <section class="glass-panel panel" aria-labelledby="generator-title">
+          <h2 id="generator-title">Генератор паролей</h2>
+
+          <div class="field">
+            <label for="password-length">Длина: <span id="length-value">16</span></label>
+            <input id="password-length" type="range" min="6" max="64" value="16" />
+          </div>
+
+          <div class="options-grid">
+            <label><input type="checkbox" id="opt-lowercase" checked /> строчные буквы (a-z)</label>
+            <label><input type="checkbox" id="opt-uppercase" checked /> заглавные буквы (A-Z)</label>
+            <label><input type="checkbox" id="opt-digits" checked /> цифры (0-9)</label>
+            <label><input type="checkbox" id="opt-symbols" checked /> символы (!@#$%^&*)</label>
+            <label><input type="checkbox" id="opt-exclude-similar" /> исключить похожие (O/0, I/l/1)</label>
+            <label><input type="checkbox" id="opt-no-repeats" /> без повторов</label>
+          </div>
+
+          <div class="output-group">
+            <label for="generated-password">Сгенерированный пароль</label>
+            <input id="generated-password" type="text" readonly placeholder="Нажмите «Сгенерировать»" />
+          </div>
+
+          <div class="button-row">
+            <button id="btn-generate" type="button">Сгенерировать</button>
+            <button id="btn-copy" type="button" class="secondary">Скопировать</button>
+          </div>
+
+          <p id="generator-message" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="glass-panel panel" aria-labelledby="checker-title">
+          <h2 id="checker-title">Проверка пароля</h2>
+
+          <div class="field">
+            <label for="check-password">Введите пароль</label>
+            <input id="check-password" type="text" placeholder="Введите пароль для анализа" />
+          </div>
+
+          <div class="button-row">
+            <button id="btn-check" type="button">Проверить</button>
+          </div>
+
+          <div id="check-result" class="check-result" aria-live="polite">
+            <div class="strength-row">
+              <span>Надёжность:</span>
+              <strong id="strength-label">—</strong>
+              <span id="strength-score">0/100</span>
+            </div>
+            <div class="strength-bar-wrap" aria-hidden="true">
+              <div id="strength-bar" class="strength-bar"></div>
+            </div>
+            <ul id="requirements-list" class="result-list"></ul>
+            <ul id="suggestions-list" class="result-list tips"></ul>
+          </div>
+        </section>
+
+        <section class="glass-panel panel panel-wide" aria-labelledby="history-title">
+          <div class="history-head">
+            <h2 id="history-title">История генерации</h2>
+            <button id="btn-clear-history" type="button" class="danger">Очистить историю</button>
+          </div>
+          <p class="history-note">Хранится локально в браузере (последние 10 паролей).</p>
+          <ul id="history-list" class="history-list"></ul>
+        </section>
+      </main>
+    </div>
+
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Скопировано!</div>
+
+    <script defer src="js/common-passwords.js"></script>
+    <script defer src="js/strength.js"></script>
+    <script defer src="js/validator.js"></script>
+    <script defer src="js/storage.js"></script>
+    <script defer src="js/generator.js"></script>
+    <script defer src="js/matrix.js"></script>
+    <script defer src="js/app.js"></script>
+  </body>
+</html>
