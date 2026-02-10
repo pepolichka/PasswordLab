@@ -62,8 +62,6 @@ https://pepolichka.github.io/PasswordLab/
 Каждый JavaScript-файл отвечает за отдельную логическую часть приложения.
 
 
-## Структура проекта
-
 ```text
 PasswordLab/
  ├── index.html
